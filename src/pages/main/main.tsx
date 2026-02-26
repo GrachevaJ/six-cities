@@ -4,10 +4,11 @@ import Logo from '../../components/logo/logo';
 import type { Offer } from '../../types/offer';
 
 type MainProps = {
+  offersCount: number;
   offers: Offer[];
 }
 
-function MainPage({ offers }: MainProps): JSX.Element {
+function MainPage({ offersCount, offers }: MainProps): JSX.Element {
   return (
     <>
       <header className="header">
@@ -78,7 +79,7 @@ function MainPage({ offers }: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{offersCount} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>

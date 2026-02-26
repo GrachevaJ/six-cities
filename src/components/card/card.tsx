@@ -1,5 +1,6 @@
 import type { Offer } from '../../types/offer';
-// import { AppRoute } from '../../const';
+import { AppRoute } from '../../const';
+import { Link } from 'react-router-dom';
 
 const STARS_COUNT = 5;
 const MAX_PERCENT_STARS_WIDTH = 100;
@@ -42,7 +43,7 @@ function Card({
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`${AppRoute.Property}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
