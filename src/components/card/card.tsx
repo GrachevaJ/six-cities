@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom';
 const STARS_COUNT = 5;
 const MAX_PERCENT_STARS_WIDTH = 100;
 
+type CardProps = Offer & {
+  onMouseMove: (id: number) => void;
+  onMouseLeave: () => void;
+}
+
 function Card({
   id,
   price,
@@ -13,10 +18,20 @@ function Card({
   isPremium,
   isFavorite,
   previewImage,
-  type
-}: Offer) : JSX.Element {
+  type,
+  onMouseMove,
+  onMouseLeave,
+}: CardProps) : JSX.Element {
+  const handleMouseMove = () => {
+    onMouseMove(id);
+  };
+
   return (
-    <article className="cities__place-card place-card">
+    <article
+      className="cities__place-card place-card"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={onMouseLeave}
+    >
       {isPremium && (<div className="place-card__mark"><span>Premium</span></div>)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">

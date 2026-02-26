@@ -9,16 +9,16 @@ import type { Offer } from '../../types/offer';
 import Property from '../../pages/property/property';
 
 type AppProps = {
-  offersCount: number;
   offers: Offer[];
 }
 
-function App({offersCount, offers}: AppProps): JSX.Element {
+function App({ offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          index element={<MainPage offersCount={offersCount} offers={offers} />}
+          path={AppRoute.Main}
+          element={<MainPage offers={offers} />}
         />
         <Route
           path={AppRoute.Login}
