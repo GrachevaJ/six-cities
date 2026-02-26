@@ -9,7 +9,7 @@ export const offers: Offer[] = [
     type: 'apartment',
     isPremium: true,
     isFavorite: true,
-    previewImage: '/public/img/amsterdam.jpg',
+    previewImage: '../img/apartment-02.jpg',
     city: {
       name: 'Amsterdam',
     }
@@ -22,7 +22,7 @@ export const offers: Offer[] = [
     type: 'hotel',
     isPremium: true,
     isFavorite: false,
-    previewImage: '/public/img/amsterdam@2x.jpg',
+    previewImage: '../img/apartment-03.jpg',
     city: {
       name: 'Amsterdam',
     }
@@ -35,9 +35,9 @@ export const offers: Offer[] = [
     type: 'house',
     isPremium: true,
     isFavorite: true,
-    previewImage: '/public/img/apartment-01.jpg',
+    previewImage: '../img/apartment-01.jpg',
     city: {
-      name: 'Amsterdam',
+      name: 'Geneva',
     }
   },
   {
@@ -48,7 +48,7 @@ export const offers: Offer[] = [
     type: 'room',
     isPremium: false,
     isFavorite: false,
-    previewImage: '/public/img/apartment-02.jpg',
+    previewImage: '../img/apartment-02.jpg',
     city: {
       name: 'Amsterdam',
     }
