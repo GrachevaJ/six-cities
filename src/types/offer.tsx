@@ -4,7 +4,7 @@ export type Offer = {
   title: string;
   rating: number;
   type: 'apartment' | 'room' | 'house' | 'hotel';
-  isPremiun: boolean;
+  isPremium: boolean;
   isFavorite: boolean;
   previewImage: string;
   city: {

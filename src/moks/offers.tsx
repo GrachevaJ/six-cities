@@ -1,4 +1,4 @@
-import { Offer } from '../types/offer';
+import type { Offer } from '../types/offer';
 
 export const offers: Offer[] = [
   {
@@ -7,7 +7,7 @@ export const offers: Offer[] = [
     title: 'Eric Vökel Boutique Apartments - Amsterdam Suites',
     rating: 4,
     type: 'apartment',
-    isPremiun: true,
+    isPremium: true,
     isFavorite: true,
     previewImage: '/public/img/amsterdam.jpg',
     city: {
@@ -20,7 +20,7 @@ export const offers: Offer[] = [
     title: 'EasyHotel Amsterdam Arena Boulevard',
     rating: 3,
     type: 'hotel',
-    isPremiun: true,
+    isPremium: true,
     isFavorite: false,
     previewImage: '/public/img/amsterdam@2x.jpg',
     city: {
@@ -33,7 +33,7 @@ export const offers: Offer[] = [
     title: 'Yays Amsterdam Salthouse Canal By Numa',
     rating: 5,
     type: 'house',
-    isPremiun: true,
+    isPremium: true,
     isFavorite: true,
     previewImage: '/public/img/apartment-01.jpg',
     city: {
@@ -46,7 +46,7 @@ export const offers: Offer[] = [
     title: 'CityPark Apartment Suit',
     rating: 2,
     type: 'room',
-    isPremiun: false,
+    isPremium: false,
     isFavorite: false,
     previewImage: '/public/img/apartment-02.jpg',
     city: {
