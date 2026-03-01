@@ -1,4 +1,3 @@
-// import Card from '../../components/card/card';
 import CardList from '../../components/cards-list/cards-list';
 import Logo from '../../components/logo/logo';
 import type { Offer } from '../../types/offer';

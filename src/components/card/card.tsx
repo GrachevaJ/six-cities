@@ -6,8 +6,9 @@ const STARS_COUNT = 5;
 const MAX_PERCENT_STARS_WIDTH = 100;
 
 type CardProps = Offer & {
-  onMouseMove: (id: number) => void;
-  onMouseLeave: () => void;
+  onMouseMove?: (id: number) => void;
+  onMouseLeave?: () => void;
+  place?: 'cities' | 'favorites';
 }
 
 function Card({
@@ -19,8 +20,9 @@ function Card({
   isFavorite,
   previewImage,
   type,
-  onMouseMove,
-  onMouseLeave,
+  place = 'cities',
+  onMouseMove = () => void 0,
+  onMouseLeave = () => void 0,
 }: CardProps) : JSX.Element {
   const handleMouseMove = () => {
     onMouseMove(id);
@@ -28,17 +30,17 @@ function Card({
 
   return (
     <article
-      className="cities__place-card place-card"
+      className={`${place === 'cities' ? `${place}__place` : `${place}`}-card place-card`}
       onMouseMove={handleMouseMove}
       onMouseLeave={onMouseLeave}
     >
       {isPremium && (<div className="place-card__mark"><span>Premium</span></div>)}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${place}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Property}/${id}`}>{title}
-          <img className="place-card__image" src={previewImage} width={260} height={200} alt={title} />
+          <img className="place-card__image" src={previewImage} width={place === 'cities' ? 260 : 150} height={place === 'cities' ? 200 : 110} alt={title} />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${isFavorite ? 'favorites__card-info' : ''} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
