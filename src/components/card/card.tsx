@@ -1,9 +1,7 @@
 import type { Offer } from '../../types/offer';
-import { AppRoute } from '../../const';
+import { AppRoute, STARS_COUNT, MAX_PERCENT_STARS_WIDTH } from '../../const';
 import { Link } from 'react-router-dom';
 
-const STARS_COUNT = 5;
-const MAX_PERCENT_STARS_WIDTH = 100;
 
 type CardProps = Offer & {
   onMouseMove?: (id: number) => void;
