@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Offer } from '../../types/offer';
+import type { Offer } from '../../types/types';
 import Card from '../card/card';
 
 type CardListProps = {

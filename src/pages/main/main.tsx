@@ -1,12 +1,14 @@
 import CardList from '../../components/cards-list/cards-list';
 import Logo from '../../components/logo/logo';
-import type { Offer } from '../../types/offer';
+import type { Offer, City } from '../../types/types';
+import Map from '../../components/map/map';
 
 type MainProps = {
+  city: City;
   offers: Offer[];
 }
 
-function MainPage({ offers }: MainProps): JSX.Element {
+function MainPage({ city, offers }: MainProps): JSX.Element {
   return (
     <>
       <header className="header">
@@ -107,7 +109,7 @@ function MainPage({ offers }: MainProps): JSX.Element {
               <CardList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <Map locations={offers.map((offer) => offer.location)} city={city} />
             </div>
           </div>
         </div>

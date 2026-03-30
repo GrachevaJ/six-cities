@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { AppRoute } from '../../const';
 import FavoritesCardList from '../../components/favorites-card-list/favorites-card-list';
-import { Offer } from '../../types/offer';
+import { Offer } from '../../types/types';
 
 type FavoritesProps = {
   offers: Offer[];

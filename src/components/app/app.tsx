@@ -5,20 +5,21 @@ import Login from '../../pages/login-page/login';
 import Favorites from '../../pages/favorites/favorites';
 import NotFound from '../not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import type { Offer } from '../../types/offer';
+import type { Offer, City } from '../../types/types';
 import Property from '../../pages/property/property';
 
 type AppProps = {
+  city: City;
   offers: Offer[];
 }
 
-function App({ offers}: AppProps): JSX.Element {
+function App({ city, offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          path={AppRoute.Main}
-          element={<MainPage offers={offers} />}
+          index
+          element={<MainPage city={city} offers={offers} />}
         />
         <Route
           path={AppRoute.Login}

@@ -1,4 +1,4 @@
-import type { Offer } from '../../types/offer';
+import type { Offer } from '../../types/types';
 import { AppRoute, STARS_COUNT, MAX_PERCENT_STARS_WIDTH } from '../../const';
 import { Link } from 'react-router-dom';
 
