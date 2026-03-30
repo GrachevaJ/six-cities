@@ -1,12 +1,13 @@
 import type { Offer } from '../../types/types';
-import { AppRoute, STARS_COUNT, MAX_PERCENT_STARS_WIDTH } from '../../const';
+import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
+import { getStarsWidth } from '../../utils';
 
 
 type CardProps = Offer & {
   onMouseMove?: (id: number) => void;
   onMouseLeave?: () => void;
-  place?: 'cities' | 'favorites';
+  place?: 'cities' | 'favorites' | 'near-places';
 }
 
 function Card({
@@ -28,13 +29,13 @@ function Card({
 
   return (
     <article
-      className={`${place === 'cities' ? `${place}__place` : `${place}`}-card place-card`}
+      className={`${place === 'cities' ? `${place}__place-` : `${place}__`}card place-card`}
       onMouseMove={handleMouseMove}
       onMouseLeave={onMouseLeave}
     >
       {isPremium && (<div className="place-card__mark"><span>Premium</span></div>)}
       <div className={`${place}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`${AppRoute.Property}/${id}`}>{title}
+        <Link to={`${AppRoute.Property}/${id}`}>
           <img className="place-card__image" src={previewImage} width={place === 'cities' ? 260 : 150} height={place === 'cities' ? 200 : 110} alt={title} />
         </Link>
       </div>
@@ -53,7 +54,7 @@ function Card({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${(MAX_PERCENT_STARS_WIDTH * rating) / STARS_COUNT}%`,}} />
+            <span style={{ width: getStarsWidth(rating)}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
