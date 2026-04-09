@@ -1,16 +1,18 @@
 import Logo from '../../components/logo/logo';
-import { City, Offer, Comment } from '../../types/types';
+import { Comment } from '../../types/types';
 import ReviewList from '../../components/review-list/review-list';
 import Map from '../../components/map/map';
 import Card from '../../components/card/card';
+import { useAppSelector } from '../../hooks/useApp';
 
 type PropertyProps = {
-  city: City;
-  nearbyOffers: Offer[];
   reviews: Comment[];
 }
 
-function Property({ city, nearbyOffers, reviews}: PropertyProps): JSX.Element {
+function Property({ reviews}: PropertyProps): JSX.Element {
+  const activeCity = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) => state.offers.filter((offer) => offer.city.name === state.city.name));
+
   return (
     <>
       <header className="header">
@@ -160,13 +162,13 @@ function Property({ city, nearbyOffers, reviews}: PropertyProps): JSX.Element {
               <ReviewList reviews={reviews} />
             </div>
           </div>
-          <Map city={city} locations={nearbyOffers.map((offer) => offer.location)} place="property" />
+          <Map city={activeCity} locations={offers.map((offer) => offer.location)} place="property" />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {nearbyOffers.map((offer) => <Card key={offer.id} {...offer} />)}
+              {offers.map((offer) => <Card key={offer.id} {...offer} />)}
             </div>
           </section>
         </div>

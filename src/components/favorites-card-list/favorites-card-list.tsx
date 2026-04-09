@@ -1,11 +1,11 @@
+import { useAppSelector } from '../../hooks/useApp';
 import type { Offer } from '../../types/types';
 import Card from '../card/card';
 
-type CardListProps = {
-  offers: Offer[];
-};
 
-function FavoritesCardList ({offers}: CardListProps): JSX.Element {
+function FavoritesCardList (): JSX.Element {
+  const offers = useAppSelector((state) => state.offers.filter((offer) => offer.city.name === state.city.name));
+
   const groupedOffersByCity = offers.reduce<{ [key: string ]: Offer[] }>((acc, curr) => {
     if (curr.isFavorite) {
       const city = curr.city.name;

@@ -2,13 +2,9 @@ import { Link } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { AppRoute } from '../../const';
 import FavoritesCardList from '../../components/favorites-card-list/favorites-card-list';
-import { Offer } from '../../types/types';
 
-type FavoritesProps = {
-  offers: Offer[];
-}
 
-function Favorites({offers}: FavoritesProps): JSX.Element {
+function Favorites(): JSX.Element {
   return (
     <>
       <header className="header">
@@ -40,7 +36,7 @@ function Favorites({offers}: FavoritesProps): JSX.Element {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesCardList offers={offers}/>
+            <FavoritesCardList />
           </section>
         </div>
       </main>

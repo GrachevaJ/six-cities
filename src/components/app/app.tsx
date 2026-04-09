@@ -5,22 +5,20 @@ import Login from '../../pages/login-page/login';
 import Favorites from '../../pages/favorites/favorites';
 import NotFound from '../not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import type { Offer, City, Comment } from '../../types/types';
+import type { Comment } from '../../types/types';
 import Property from '../../pages/property/property';
 
 type AppProps = {
-  city: City;
-  offers: Offer[];
   reviews: Comment[];
 }
 
-function App({ city, offers, reviews}: AppProps): JSX.Element {
+function App({reviews}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           index
-          element={<MainPage city={city} offers={offers} />}
+          element={<MainPage />}
         />
         <Route
           path={AppRoute.Login}
@@ -28,7 +26,7 @@ function App({ city, offers, reviews}: AppProps): JSX.Element {
         />
         <Route
           path={`${AppRoute.Property}/:id`}
-          element={<Property city={city} nearbyOffers={offers} reviews={reviews} />}
+          element={<Property reviews={reviews} />}
         />
         <Route
           path={AppRoute.Favorites}
@@ -36,7 +34,7 @@ function App({ city, offers, reviews}: AppProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <Favorites offers={offers}/>
+              <Favorites />
             </PrivateRoute>
           }
         />
