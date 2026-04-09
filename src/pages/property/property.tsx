@@ -1,17 +1,14 @@
 import Logo from '../../components/logo/logo';
-import { Comment } from '../../types/types';
 import ReviewList from '../../components/review-list/review-list';
 import Map from '../../components/map/map';
 import Card from '../../components/card/card';
 import { useAppSelector } from '../../hooks/useApp';
 
-type PropertyProps = {
-  reviews: Comment[];
-}
 
-function Property({ reviews}: PropertyProps): JSX.Element {
+function Property(): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.offers.filter((offer) => offer.city.name === state.city.name));
+  const reviews = useAppSelector((state) => state.reviews);
 
   return (
     <>

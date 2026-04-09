@@ -5,14 +5,10 @@ import Login from '../../pages/login-page/login';
 import Favorites from '../../pages/favorites/favorites';
 import NotFound from '../not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import type { Comment } from '../../types/types';
 import Property from '../../pages/property/property';
 
-type AppProps = {
-  reviews: Comment[];
-}
 
-function App({reviews}: AppProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -26,7 +22,7 @@ function App({reviews}: AppProps): JSX.Element {
         />
         <Route
           path={`${AppRoute.Property}/:id`}
-          element={<Property reviews={reviews} />}
+          element={<Property />}
         />
         <Route
           path={AppRoute.Favorites}
