@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import Card from '../card/card';
 import Map from '../map/map';
-import { useAppSelector } from '../../hooks/useApp';
+import { useAppDispatch, useAppSelector } from '../../hooks/useApp';
 import SortingList from '../sorting-list/sorting-list';
+import { Comparator } from '../../const';
+import { SortName } from '../../types/types';
+import { setSorting } from '../../store/action';
 
 
 function CardList (): JSX.Element {
+  const dispatch = useAppDispatch();
+  const activeSorting = useAppSelector((state) => state.sorting);
   const activeCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers.filter((offer) => offer.city.name === state.city.name));
+  const offers = useAppSelector((state) => state.offers.filter((offer) => offer.city.name === state.city.name).sort(Comparator[state.sorting]));
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeOffer, setActiveOffer] = useState<number | null>(null);
@@ -20,12 +25,16 @@ function CardList (): JSX.Element {
     setActiveOffer(null);
   };
 
+  const onSortingChange = (name: SortName) => {
+    dispatch(setSorting(name));
+  };
+
   return (
     <>
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{offers.length} places to stay in {activeCity.name}</b>
-        <SortingList />
+        <SortingList onChange={onSortingChange} activeSorting={activeSorting} />
         <div className="cities__places-list places__list tabs__content">
           {offers.map((offer) => (
             <Card
