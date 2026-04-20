@@ -54,6 +54,7 @@ export const CityLocation: { [key in CityName]: Location } = {
 };
 
 export const URL_MARKER_DEFAULT = 'img/pin.svg';
+export const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
 export enum Sorting {
   Popular = 'Popular',
