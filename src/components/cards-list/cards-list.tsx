@@ -6,6 +6,7 @@ import SortingList from '../sorting-list/sorting-list';
 import { Comparator } from '../../const';
 import { SortName } from '../../types/types';
 import { setSorting } from '../../store/action';
+import Spinner from '../spinner/spinner';
 
 
 function CardList (): JSX.Element {
@@ -13,7 +14,7 @@ function CardList (): JSX.Element {
   const activeSorting = useAppSelector((state) => state.sorting);
   const activeCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.offers.filter((offer) => offer.city.name === state.city.name).sort(Comparator[state.sorting]));
-
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
   const [activeOffer, setActiveOffer] = useState<number | null>(null);
 
   const handleCardMouseMove = (id: number) => {
@@ -27,6 +28,10 @@ function CardList (): JSX.Element {
   const onSortingChange = (name: SortName) => {
     dispatch(setSorting(name));
   };
+
+  if (isOffersLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>

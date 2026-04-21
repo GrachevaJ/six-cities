@@ -1,13 +1,14 @@
 import { createReducer } from '@reduxjs/toolkit';
 import type {City, Offer, Comment, SortName} from '../types/types';
-import { setCity, setOffers, setReviews, setSorting } from './action';
+import { setCity, fetchOffers, setReviews, setSorting } from './action';
 import { cities, CityLocation, Sorting } from '../const';
 
 type State = {
   city: City,
   offers: Offer[],
   reviews: Comment[],
-  sorting: SortName
+  sorting: SortName,
+  isOffersLoading: boolean,
 };
 
 const initialState: State = {
@@ -18,6 +19,7 @@ const initialState: State = {
   offers: [],
   reviews: [],
   sorting: Sorting.Popular,
+  isOffersLoading: false,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -28,8 +30,15 @@ export const reducer = createReducer(initialState, (builder) => {
         location: CityLocation[action.payload]
       };
     })
-    .addCase(setOffers, (state, action) => {
+    .addCase(fetchOffers.pending, (state, action) => {
+      state.isOffersLoading = true;
+    })
+    .addCase(fetchOffers.fulfilled, (state, action) => {
       state.offers = action.payload;
+      state.isOffersLoading = false;
+    })
+    .addCase(fetchOffers.rejected, (state, action) => {
+      state.isOffersLoading = false;
     })
     .addCase(setReviews, (state, action) => {
       state.reviews = action.payload;

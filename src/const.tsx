@@ -7,6 +7,10 @@ export enum AppRoute {
   Property = '/offer'
 }
 
+export enum ApiRoute {
+  Offers = '/hotels'
+}
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -71,3 +75,4 @@ export const Comparator: {
   PriceDecrease: (a, b) => b.price - a.price,
   TopRated: (a, b) => b.rating - a.rating,
 };
+
