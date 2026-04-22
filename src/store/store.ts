@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { reducer } from './reducer';
-// import { setOffers, setReviews } from './action';
 import { createAPI } from '../components/api/api';
-import { fetchOffers } from './action';
+import { fetchOffers, fetchUserStatus } from './action';
 
 const api = createAPI();
 const store = configureStore({
@@ -14,8 +13,7 @@ const store = configureStore({
   }),
 });
 
-// store.dispatch(setOffers(offers));
-// store.dispatch(setReviews(reviews));
+store.dispatch(fetchUserStatus());
 store.dispatch(fetchOffers());
 
 export default store;
