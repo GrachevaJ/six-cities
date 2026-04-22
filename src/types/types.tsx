@@ -19,7 +19,10 @@ export type User = {
   avatarUrl: string;
   isPro: boolean;
   email: string;
+  token: string;
 }
+
+export type UserAuth = Pick<User, 'email'> & {password: string};
 
 export type Comment = {
   id: number;

@@ -1,8 +1,24 @@
 import Logo from '../../components/logo/logo';
+import type { FormEvent } from 'react';
+import type { UserAuth } from '../../types/types';
+import { useAppDispatch } from '../../hooks/useApp';
+import { loginUser } from '../../store/action';
 
 function Login(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form) as Iterable<[UserAuth]>;
+    const data = Object.fromEntries(formData);
+
+    dispatch(loginUser(data));
+  };
+
+
   return (
-    <>
+    <div className="page page--gray page--login">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -32,7 +48,7 @@ function Login(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form className="login__form form" action="#" method="post" onSubmit={handleFormSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input className="login__input form__input" type="email" name="email" placeholder="Email" required />
@@ -53,7 +69,7 @@ function Login(): JSX.Element {
           </section>
         </div>
       </main>
-    </>
+    </div>
   );
 }
 
