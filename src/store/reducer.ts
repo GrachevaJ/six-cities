@@ -1,16 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
 import type {City, Offer, Comment, SortName, User} from '../types/types';
-import { setCity, fetchOffers, setReviews, setSorting, fetchUserStatus } from './action';
+import { setCity, fetchOffers, setSorting, fetchUserStatus, fetchOffer, fetchNearbyOffers, fetchComments, postComment } from './action';
 import { cities, CityLocation, Sorting, AuthorizationStatus } from '../const';
 
 type State = {
   city: City,
   offers: Offer[],
-  reviews: Comment[],
+  comments: Comment[],
   sorting: SortName,
   isOffersLoading: boolean,
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus: AuthorizationStatus,
   user: User['email'],
+  offer: Offer | null,
+  isOfferLoading: boolean,
+  nearbyOffers: Offer[],
 };
 
 const initialState: State = {
@@ -19,11 +22,14 @@ const initialState: State = {
     location: CityLocation[cities[0]]
   },
   offers: [],
-  reviews: [],
+  comments: [],
   sorting: Sorting.Popular,
   isOffersLoading: false,
   authorizationStatus: AuthorizationStatus.NoAuth,
   user: '',
+  offer: null,
+  isOfferLoading: false,
+  nearbyOffers: [],
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -44,9 +50,6 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchOffers.rejected, (state) => {
       state.isOffersLoading = false;
     })
-    .addCase(setReviews, (state, action) => {
-      state.reviews = action.payload;
-    })
     .addCase(setSorting, (state, action) => {
       state.sorting = action.payload;
     })
@@ -56,5 +59,24 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchUserStatus.rejected, (state) => {
       state.authorizationStatus = AuthorizationStatus.NoAuth;
+    })
+    .addCase(fetchOffer.pending, (state) => {
+      state.isOfferLoading = true;
+    })
+    .addCase(fetchOffer.fulfilled, (state, action) => {
+      state.offer = action.payload;
+      state.isOfferLoading = false;
+    })
+    .addCase(fetchOffer.rejected, (state) => {
+      state.isOfferLoading = false;
+    })
+    .addCase(fetchNearbyOffers.fulfilled, (state, action) => {
+      state.nearbyOffers = action.payload;
+    })
+    .addCase(fetchComments.fulfilled, (state, action) => {
+      state.comments = action.payload;
+    })
+    .addCase(postComment.fulfilled, (state, action) => {
+      state.comments = action.payload;
     });
 });

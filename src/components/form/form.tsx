@@ -1,10 +1,15 @@
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
 import { Fragment, useState } from 'react';
 import { STARS_COUNT } from '../../const';
+import { CommentAuth } from '../../types/types';
 
-function Form() {
+type FormProps = {
+  onSubmit: (FormData: Omit<CommentAuth, 'id'>) => void;
+}
+
+function Form({onSubmit}: FormProps) {
   const [text, setText] = useState<string>('');
-  const [rating, setRating] = useState<number | null>(null);
+  const [rating, setRating] = useState<number>(0);
 
   const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
@@ -14,8 +19,17 @@ function Form() {
     setRating(Number(e.target.value));
   };
 
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    onSubmit({
+      comment: text,
+      rating
+    });
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">
                 Your review
       </label>
@@ -59,7 +73,6 @@ function Form() {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
         >
             Submit
         </button>

@@ -42,10 +42,16 @@ export type Offer = {
   isFavorite: boolean;
   location: Location;
   previewImage: string;
-  city: {
-    name: CityName;
-  }
+  city: City;
+  bedrooms: number;
+  description: string;
+  goods: [string];
+  host: User;
+  images: [string];
+  maxAdults: number;
 };
+
+export type CommentAuth = Pick<Comment, 'comment' | 'rating'> & Pick<Offer, 'id'>;
 
 export type SortName = keyof typeof Sorting;
 
