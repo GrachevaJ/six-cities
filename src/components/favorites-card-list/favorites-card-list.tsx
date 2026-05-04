@@ -1,10 +1,11 @@
 import { useAppSelector } from '../../hooks/useApp';
+import { selectOffers } from '../../store/site-data/selectors';
 import type { Offer } from '../../types/types';
 import Card from '../card/card';
 
 
 function FavoritesCardList (): JSX.Element {
-  const offers = useAppSelector((state) => state.offers.filter((offer) => offer.city.name === state.city.name));
+  const offers = useAppSelector(selectOffers);
 
   const groupedOffersByCity = offers.reduce<{ [key: string ]: Offer[] }>((acc, curr) => {
     if (curr.isFavorite) {

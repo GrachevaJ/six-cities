@@ -74,7 +74,7 @@ export enum Sorting {
   TopRated = 'Top rated first',
 }
 
-export const Comparator: {
+export const Comprator: {
   [key in SortName]: (a: Offer, b: Offer) => number
 } = {
   Popular: () => 0,
@@ -83,3 +83,8 @@ export const Comparator: {
   TopRated: (a, b) => b.rating - a.rating,
 };
 
+export enum StoreSlice {
+  SiteData = 'SITE_DATA',
+  SiteProcess = 'SITE_PROCESS',
+  UserProcess = 'USER_PROCESS',
+}

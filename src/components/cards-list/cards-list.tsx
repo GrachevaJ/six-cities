@@ -3,18 +3,19 @@ import Card from '../card/card';
 import Map from '../map/map';
 import { useAppDispatch, useAppSelector } from '../../hooks/useApp';
 import SortingList from '../sorting-list/sorting-list';
-import { Comparator } from '../../const';
 import { SortName } from '../../types/types';
-import { setSorting } from '../../store/action';
+import { setSorting } from '../../store/site-process/site-process';
 import Spinner from '../spinner/spinner';
+import { getCity, getSorting } from '../../store/site-process/selectors';
+import { getIsOffersLoading, selectOffers } from '../../store/site-data/selectors';
 
 
 function CardList (): JSX.Element {
   const dispatch = useAppDispatch();
-  const activeSorting = useAppSelector((state) => state.sorting);
-  const activeCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers.filter((offer) => offer.city.name === state.city.name).sort(Comparator[state.sorting]));
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+  const activeSorting = useAppSelector(getSorting);
+  const activeCity = useAppSelector(getCity);
+  const offers = useAppSelector(selectOffers);
+  const isOffersLoading = useAppSelector(getIsOffersLoading);
   const [activeOffer, setActiveOffer] = useState<number | null>(null);
 
   const handleCardMouseMove = (id: number) => {
