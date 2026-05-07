@@ -9,13 +9,15 @@ export enum AppRoute {
 }
 
 export enum HttpCode {
-  NotFound = 404
+  NotFound = 404,
+  NoAuth = 401
 }
 
 export enum ApiRoute {
   Offers = '/hotels',
   Login = '/login',
-  Comments = '/comments'
+  Comments = '/comments',
+  Favorite = '/favorite'
 }
 
 export enum AuthorizationStatus {

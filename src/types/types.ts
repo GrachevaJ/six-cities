@@ -52,6 +52,7 @@ export type Offer = {
 };
 
 export type CommentAuth = Pick<Comment, 'comment' | 'rating'> & Pick<Offer, 'id'>;
+export type FavoriteAuth = Pick<Offer, 'id'> & {status: 1 | 0};
 
 export type SortName = keyof typeof Sorting;
 

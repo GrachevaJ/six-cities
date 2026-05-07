@@ -1,13 +1,16 @@
 import { useAppSelector } from '../../hooks/useApp';
-import { selectOffers } from '../../store/site-data/selectors';
+import { getFavoriteOffers, getIsFavoriteOffersLoading } from '../../store/site-data/selectors';
 import type { Offer } from '../../types/types';
 import Card from '../card/card';
+import Spinner from '../spinner/spinner';
 
 
 function FavoritesCardList (): JSX.Element {
-  const offers = useAppSelector(selectOffers);
 
-  const groupedOffersByCity = offers.reduce<{ [key: string ]: Offer[] }>((acc, curr) => {
+  const isFavoriteOffersLoading = useAppSelector(getIsFavoriteOffersLoading);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+
+  const groupedOffersByCity = favoriteOffers.reduce<{ [key: string ]: Offer[] }>((acc, curr) => {
     if (curr.isFavorite) {
       const city = curr.city.name;
 
@@ -20,6 +23,10 @@ function FavoritesCardList (): JSX.Element {
 
     return acc;
   }, {});
+
+  if (isFavoriteOffersLoading) {
+    return <Spinner />;
+  }
 
   return (
     <ul className="favorites__list">
