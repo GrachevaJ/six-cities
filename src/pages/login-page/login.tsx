@@ -1,8 +1,8 @@
-import Logo from '../../components/logo/logo';
 import type { FormEvent } from 'react';
 import type { UserAuth } from '../../types/types';
 import { useAppDispatch } from '../../hooks/useApp';
 import { loginUser } from '../../store/action';
+import Header from '../../components/header/header';
 
 function Login(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -19,15 +19,9 @@ function Login(): JSX.Element {
 
   return (
     <div className="page page--gray page--login">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-          </div>
-        </div>
-      </header>
+
+      <Header />
+
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">

@@ -3,21 +3,25 @@ import Card from '../card/card';
 import Map from '../map/map';
 import { useAppDispatch, useAppSelector } from '../../hooks/useApp';
 import SortingList from '../sorting-list/sorting-list';
-import { SortName } from '../../types/types';
+import { Offer, SortName } from '../../types/types';
 import { setSorting } from '../../store/site-process/site-process';
 import Spinner from '../spinner/spinner';
 import { getCity, getSorting } from '../../store/site-process/selectors';
-import { getIsOffersLoading, selectOffers } from '../../store/site-data/selectors';
+import { getIsOffersLoading } from '../../store/site-data/selectors';
 import CardListEmpty from '../card-list-empty/card-list-empty';
 
-function CardList (): JSX.Element {
+type CardListProps = {
+  offers: Offer[];
+  isEmpty: boolean;
+}
+
+function CardList ({offers, isEmpty}: CardListProps): JSX.Element {
   const dispatch = useAppDispatch();
   const activeSorting = useAppSelector(getSorting);
   const activeCity = useAppSelector(getCity);
-  const offers = useAppSelector(selectOffers);
   const isOffersLoading = useAppSelector(getIsOffersLoading);
   const [activeOffer, setActiveOffer] = useState<number | null>(null);
-  const isEmpty = offers.length === 0;
+
 
   const handleCardMouseMove = (id: number) => {
     setActiveOffer(id);
@@ -57,6 +61,7 @@ function CardList (): JSX.Element {
         {!isEmpty && <Map locations={offers.map(({id, location}) => ({id, ...location}))} city={activeCity} activeOffer={activeOffer}/>}
       </div>
     </>
+
   );
 }
 

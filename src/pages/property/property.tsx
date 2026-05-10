@@ -1,4 +1,3 @@
-import Logo from '../../components/logo/logo';
 import ReviewList from '../../components/review-list/review-list';
 import Map from '../../components/map/map';
 import Card from '../../components/card/card';
@@ -12,6 +11,7 @@ import { CommentAuth } from '../../types/types';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getComments, getIsOfferLoading, getNearbyOffers, getOffer } from '../../store/site-data/selectors';
 import Bookmark from '../../components/bookmark/bookmark';
+import Header from '../../components/header/header';
 
 
 function Property(): JSX.Element | null {
@@ -52,31 +52,9 @@ function Property(): JSX.Element | null {
 
   return (
     <>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="/">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="/">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+
+      <Header />
+
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -99,7 +77,9 @@ function Property(): JSX.Element | null {
                 <h1 className="property__name">
                   {title}
                 </h1>
+
                 <Bookmark id={id} isActive={isFavorite} place="property" />
+
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -152,16 +132,22 @@ function Property(): JSX.Element | null {
                   </p>
                 </div>
               </div>
+
               <ReviewList reviews={comments} authorizationStatus={authorizationStatus} onSubmit={onFormSubmit}/>
+
             </div>
           </div>
+
           <Map city={city} locations={locations} activeOffer={id} place="property" />
+
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
+
               {nearbyOffers.map((nearbyOffer) => <Card key={nearbyOffer.id} {...nearbyOffer} place="near-places" />)}
+
             </div>
           </section>
         </div>

@@ -23,6 +23,7 @@ const Header = () => {
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">{user}</span>
+                    {/* <span className="header__favorite-count">3</span> */}
                   </Link>
                 </li>
               )}
