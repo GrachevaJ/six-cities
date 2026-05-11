@@ -1,12 +1,23 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { useAppSelector } from '../../hooks/useApp';
+import { useAppDispatch, useAppSelector } from '../../hooks/useApp';
 import Logo from '../logo/logo';
 import { getAuthorizationStatus, getUser } from '../../store/user-process/selectors';
+import { getFavoriteOffers } from '../../store/site-data/selectors';
+import { memo } from 'react';
+import { logoutUser } from '../../store/action';
 
 const Header = () => {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const user = useAppSelector(getUser);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const dispatch = useAppDispatch();
+
+  const handleLogoutClick = () => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(logoutUser());
+    }
+  };
 
   return (
     <header className="header">
@@ -22,13 +33,24 @@ const Header = () => {
                   <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">{user}</span>
-                    {/* <span className="header__favorite-count">3</span> */}
+                    <span className="header__user-name user__name">{user} </span>
+                    <span
+                      className="header__favorite-count"
+                      style={{
+                        color: '#fff',
+                        backgroundColor: '#4481c3',
+                        height: '20px', width: '20px',
+                        textShadow: '1px 0 0,.5px 0 0,-1px 0 0',
+                        WebkitTransform:' skew(-15deg)',
+                        padding: '5px'
+                      }}
+                    >{favoriteOffers.length}
+                    </span>
                   </Link>
                 </li>
               )}
               <li className="header__nav-item">
-                <Link className="header__nav-link" to={AppRoute.Login}>
+                <Link className="header__nav-link" to={AppRoute.Login} onClick={handleLogoutClick}>
                   <span className="header__signout">{
                     authorizationStatus === AuthorizationStatus.Auth ? 'Sign out' : 'Sign in'
                   }
@@ -43,4 +65,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

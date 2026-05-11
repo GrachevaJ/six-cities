@@ -9,7 +9,7 @@ function MainPage(): JSX.Element {
   const isEmpty = offers.length === 0;
 
   return (
-    <>
+    <div className="page page--gray page--main">
 
       <Header />
 
@@ -30,7 +30,7 @@ function MainPage(): JSX.Element {
           </div>
         </div>
       </main>
-    </>
+    </div>
 
   );
 }

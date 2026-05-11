@@ -1,6 +1,6 @@
-import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { AxiosError, AxiosInstance } from 'axios';
-import { CityName, Offer, Comment, SortName, User, UserAuth, CommentAuth, FavoriteAuth } from '../types/types';
+import { Offer, Comment, User, UserAuth, CommentAuth, FavoriteAuth } from '../types/types';
 import { ApiRoute, AppRoute, HttpCode } from '../const';
 import { Token } from '../utils';
 import { History } from 'history';
@@ -16,6 +16,7 @@ export const Action = {
   SET_SORTING: 'sorting/set',
   FETCH_USER_STATUS: 'user/fetch-status',
   LOGIN_USER: 'user/login',
+  LOGOUT_USER: 'user/logout',
   FETCH_OFFER: 'offer/fetch',
   FETCH_NEARBY_OFFERS: 'offers/fetch-nearby',
   FETCH_COMMENTS: 'offer/fetch-comments',
@@ -23,10 +24,6 @@ export const Action = {
   FETCH_FAVORITE_OFFERS: 'offers/fetch-favorite',
   POST_FAVORITE: 'offer/post-favorite'
 };
-
-export const setCity = createAction<CityName>(Action.SET_CITY);
-
-export const setSorting = createAction<SortName>(Action.SET_SORTING);
 
 export const fetchOffers = createAsyncThunk<Offer[], undefined, {extra: Extra}>(
   Action.FETCH_OFFERS,
@@ -52,13 +49,26 @@ export const loginUser = createAsyncThunk<UserAuth['email'], UserAuth, {extra: E
   Action.LOGIN_USER,
   async ({email, password}, {extra}) => {
     const {api, history} = extra;
-    const {data} = await api.post<User>(ApiRoute.Login, {email, password});
+    const {data} = await api.post<User & {token: string}>(ApiRoute.Login, {email, password});
     const {token} = data;
 
     Token.save(token);
     history.push(AppRoute.Main);
 
     return email;
+  }
+);
+
+export const logoutUser = createAsyncThunk<void, undefined, {extra: Extra}>(
+  Action.LOGOUT_USER,
+  async (_, {extra}) => {
+    const {api, history} = extra;
+
+    await api.delete(ApiRoute.Logout);
+
+    Token.drop();
+
+    history.push(AppRoute.Main);
   }
 );
 

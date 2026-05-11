@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig} from 'axios';
-import { Token } from '../../utils';
+import { Token } from './utils';
 
 const BACEND_URL = 'https://10.react.htmlacademy.pro/six-cities';
 const REQUEST_TIMEOUT = 5000;

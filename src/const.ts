@@ -5,7 +5,8 @@ export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
   Property = '/offer',
-  NotFound = '/404'
+  NotFound = '/404',
+  Logout = '/logout'
 }
 
 export enum HttpCode {
@@ -17,7 +18,8 @@ export enum ApiRoute {
   Offers = '/hotels',
   Login = '/login',
   Comments = '/comments',
-  Favorite = '/favorite'
+  Favorite = '/favorite',
+  Logout = '/logout'
 }
 
 export enum AuthorizationStatus {
