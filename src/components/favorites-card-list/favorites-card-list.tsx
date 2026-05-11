@@ -1,14 +1,17 @@
-import { useAppSelector } from '../../hooks/useApp';
+import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/useApp';
 import { getFavoriteOffers, getIsFavoriteOffersLoading } from '../../store/site-data/selectors';
-import type { Offer } from '../../types/types';
+import type { CityName, Offer } from '../../types/types';
 import Card from '../card/card';
 import Spinner from '../spinner/spinner';
+import { setCity } from '../../store/site-process/site-process';
 
 
 function FavoritesCardList (): JSX.Element {
 
   const isFavoriteOffersLoading = useAppSelector(getIsFavoriteOffersLoading);
   const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const dispatch = useAppDispatch();
 
   const groupedOffersByCity = favoriteOffers.reduce<{ [key: string ]: Offer[] }>((acc, curr) => {
     if (curr.isFavorite) {
@@ -34,9 +37,9 @@ function FavoritesCardList (): JSX.Element {
         <li className="favorites__locations-items" key={city}>
           <div className="favorites__locations locations locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <Link className="locations__item-link" to="/" onClick={() => dispatch(setCity(city as CityName))}>
                 <span>{city}</span>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="favorites__places">
