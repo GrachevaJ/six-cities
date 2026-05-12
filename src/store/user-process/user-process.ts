@@ -15,7 +15,7 @@ export const userProcess = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchUserStatus.fulfilled, (state, action) => {
-        state.user = action.payload.email;
+        state.user = action.payload;
         state.authorizationStatus = AuthorizationStatus.Auth;
       })
       .addCase(fetchUserStatus.rejected, (state) => {
@@ -27,6 +27,10 @@ export const userProcess = createSlice({
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.user = '';
+      })
+      .addDefaultCase((state) => {
+        state.authorizationStatus = AuthorizationStatus.Unknown;
         state.user = '';
       });
   }

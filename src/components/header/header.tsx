@@ -39,10 +39,11 @@ const Header = () => {
                       style={{
                         color: '#fff',
                         backgroundColor: '#4481c3',
-                        height: '20px', width: '20px',
+                        height: '30px',
+                        width: '30px',
                         textShadow: '1px 0 0,.5px 0 0,-1px 0 0',
-                        WebkitTransform:' skew(-15deg)',
-                        padding: '5px'
+                        borderRadius: '50%',
+                        padding: '10px'
                       }}
                     >{favoriteOffers.length}
                     </span>

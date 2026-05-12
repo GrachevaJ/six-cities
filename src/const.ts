@@ -25,7 +25,7 @@ export enum ApiRoute {
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
-  Unknow = 'UNKNOW',
+  Unknown = 'UNKNOWN',
 }
 
 export const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] as const;
